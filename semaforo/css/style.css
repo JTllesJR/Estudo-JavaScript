@@ -1,5 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&display=swap');
+
 *{
-    margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
@@ -10,8 +11,51 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 5vh;
 }
 .button {
-    width: 80px;
+    width: auto;
+    padding: 15px;
+    margin: 5px;
+    font-family: "Edu AU VIC WA NT Pre", cursive;
+    font-size: 15px;
+}
+
+#automatic {
+    margin-right: 5px;
+}
+
+#red:hover {
+    background-color: red;
+    color: white;
+    font-size: 15px;
+    padding: 20px;
+    width: auto;
+    font-weight: bold;
+}
+
+#yellow:hover {
+    background-color: yellow;
+    color: black;
+    font-size: 15px;
+    padding: 20px;
+    width: auto;
+    font-weight: bold;
+}
+
+#green:hover {
+    background-color: green;
+    color: white;
+    font-size: 15px;
+    padding: 20px;
+    width: auto;
+    font-weight: bold;
+}
+
+#automatic:hover {
+    background-color: blue;
+    color: white;
+    font-size: 15px;
+    padding: 20px;
+    width: auto;
+    font-weight: bold;
 }
