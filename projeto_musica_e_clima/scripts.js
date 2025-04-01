@@ -9,6 +9,10 @@ for (i = 1; i <= 12; i++) {
     videos.push(`video/video${i}.mp4`);
 }
 
+const videoGelado = videos[8];
+const videosFrios = [videos[5], videos[6], videos[7]];
+const videosQuentes = [videos[0], videos[1], videos[2], videos[3], videos[4], videos[9], videos[10], videos[11]];
+
 let musicas = [
     {
         titulo: 'Musica 1',
@@ -121,7 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
 function botaoDeBusca() {
     const inputValue = input.value;
     movimentoInput(inputValue);
-    
 }
 
 // Funções de abrir e fechar a aba de pesquisa
@@ -131,7 +134,6 @@ function fecharInput() {
     input.style.padding = '0.5rem 0.5rem 0.5rem 2.6rem';
     input.style.transition = 'all 0.5s ease-in-out 0s';
     input.style.value = '';
-    mudarVideo();
 }
 
 function abrirInput() {
@@ -142,17 +144,24 @@ function abrirInput() {
     input.style.value = '';
 }
 
-function mudarVideo() {
+function mudarVideo(temperatura) {
 
     const videoElement = document.querySelector('.video'); // Seleciona o elemento <video>
     const sourceElement = document.querySelector('#video-source'); // Seleciona o <source>
+    let novoVideo;
+
+    if (temperatura <= 0){
+        novoVideo = videoGelado; // Vídeo de gelo
+    } else if (temperatura <= 15) {
+        novoVideo = videosFrios[Math.floor(Math.random() * videosFrios.length)]; // Vídeo ameno
+    } else {
+        novoVideo = videosQuentes[Math.floor(Math.random() * videosQuentes.length)]; // Vídeo quente
+    }
 
     if (sourceElement && videoElement) {
-        // Escolhe um vídeo aleatório da lista
-        const novoVideo = videos[Math.floor(Math.random() * videos.length)];
+        // Escolhe um vídeo de acordo com o tempo
 
         sourceElement.src = novoVideo;
-
         videoElement.load();
         videoElement.play();
     }
@@ -202,15 +211,18 @@ async function procurarCidade(city) {
     catch {
         alert('A pesquisa por cidade deu errado!');
     }
-
-
 }
 
 
 function mostrarClimaNaTela(result) {
+    let temperatura = parseInt(result.main.temp.toFixed(0));
+    console.log(temperatura);
     document.querySelector('.icone-tempo').src = `./assets/${result.weather[0].icon}.png`;
     document.querySelector('.nome-cidade').innerHTML = `${result.name}`;
     document.querySelector('.temperatura').innerHTML = `${result.main.temp.toFixed(0)}ºC`;
     document.querySelector('.max-temperatura').innerHTML = `máx: ${result.main.temp_max.toFixed(0)}ºC`;
     document.querySelector('.min-temperatura').innerHTML = `mín: ${result.main.temp_min.toFixed(0)}ºC`;
+    
+    // Chama a função para mudar o vídeo com base na temperatura
+    mudarVideo(temperatura);
 }
